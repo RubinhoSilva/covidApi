@@ -10,7 +10,7 @@ use Geocoder\Laravel\ProviderAndDumperAggregator as Geocoder;
 
 class DeviceController extends Controller
 {
-    public function cadastro(Request $request){
+    public function cadastrar(Request $request){
         $header = array(
             'Content-Type' => 'application/json; charset=UTF-8',
             'charset' => 'utf-8'
