@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CriarTbDevice extends Migration
+class TbLocalizacao extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CriarTbDevice extends Migration
      */
     public function up()
     {
-        Schema::create('tb_device', function (Blueprint $table) {
-            $table->string('idDevice', 191)->unique()->primary();
-            $table->char('plataforma', 7);
-            $table->tinyInteger('status')->default(0);
+        Schema::create('tb_localizacao', function (Blueprint $table) {
+            $table->id('idLocalizacao');
+            $table->string('dados');
+            $table->dateTime('horario');
+            $table->string('cidade');
             $table->softDeletes();
         });
     }
@@ -28,6 +29,6 @@ class CriarTbDevice extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_device');
+        Schema::dropIfExists('tb_localizacao');
     }
 }
