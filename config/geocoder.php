@@ -60,8 +60,8 @@ return [
     'providers' => [
         Chain::class => [
             Here::class => [
-                'oaxQxAT2wEpnxipbtCWd',
-                'kfeG9JwVIjDqs2NnYOCi8wZA5YvLo4Hc0i9481x4Pxw',
+                '2trz31qKgRLzb4mQWsIi',
+                'bB0_1LR6MXFGGOwjMy3Uyg',
                 false
             ],
             GeoPlugin::class  => [],
