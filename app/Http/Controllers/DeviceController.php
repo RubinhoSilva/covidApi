@@ -44,8 +44,6 @@ class DeviceController extends Controller
             $cidade = json_decode($resultado)->properties->locality;
         }
 
-
-
         $localizacao = new Localizacao();
         $localizacao->cidade = $cidade;
         $localizacao->dados = $data['localizacao'];

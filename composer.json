@@ -17,7 +17,8 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "toin0u/geocoder-laravel": "^4.3",
-        "ext-json": "*"
+        "ext-json": "*",
+        "tymon/jwt-auth": "1.0.*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
