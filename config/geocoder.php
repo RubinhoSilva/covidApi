@@ -1,5 +1,6 @@
 <?php
 
+use Geocoder\Provider\ArcGISOnline\ArcGISOnline;
 use Geocoder\Provider\Chain\Chain;
 use Geocoder\Provider\GeoPlugin\GeoPlugin;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
@@ -57,7 +58,7 @@ return [
     */
     'providers' => [
         Chain::class => [
-            GoogleMaps::class => [
+            ArcGISOnline::class => [
                 env('GOOGLE_MAPS_LOCALE', 'en-US'),
                 env('GOOGLE_MAPS_API_KEY'),
             ],

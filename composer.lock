@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e0a6e5335fd7faf4afaceb14ea54b35c",
+    "content-hash": "7503f930dd01d32bed6f19fbeb322b19",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -556,6 +556,63 @@
                 }
             ],
             "time": "2020-03-11T21:05:07+00:00"
+        },
+        {
+            "name": "geocoder-php/arcgis-online-provider",
+            "version": "4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/geocoder-php/arcgis-online-provider.git",
+                "reference": "f17c866fea6ea10ec3bc50623a9047d46b3dc866"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/geocoder-php/arcgis-online-provider/zipball/f17c866fea6ea10ec3bc50623a9047d46b3dc866",
+                "reference": "f17c866fea6ea10ec3bc50623a9047d46b3dc866",
+                "shasum": ""
+            },
+            "require": {
+                "geocoder-php/common-http": "^4.0",
+                "php": "^7.0",
+                "willdurand/geocoder": "^4.0"
+            },
+            "provide": {
+                "geocoder-php/provider-implementation": "1.0"
+            },
+            "require-dev": {
+                "geocoder-php/provider-integration-tests": "^1.0",
+                "nyholm/psr7": "^0.2.2",
+                "php-http/curl-client": "^1.7",
+                "php-http/message": "^1.0",
+                "phpunit/phpunit": "^6.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Geocoder\\Provider\\ArcGISOnline\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "William DURAND",
+                    "email": "william.durand1@gmail.com"
+                }
+            ],
+            "description": "Geocoder ArcGIS Online adapter",
+            "homepage": "http://geocoder-php.org/Geocoder/",
+            "time": "2017-06-17T17:15:43+00:00"
         },
         {
             "name": "geocoder-php/chain-provider",
