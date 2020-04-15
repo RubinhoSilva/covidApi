@@ -50,5 +50,12 @@ class DeviceController extends Controller
         $localizacao->horario = $data['horario'];
         $localizacao->idDevice = $data['idDevice'];
         $localizacao->save();
+
+        $credentials = [
+            'idDevice' => $data['idDevice']];
+
+        $token = auth('device')->attempt($credentials);
+
+        var_dump($token);
     }
 }

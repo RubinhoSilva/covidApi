@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Geocoder\Laravel\Providers\GeocoderService::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
     ],
 
