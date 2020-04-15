@@ -19,4 +19,8 @@ class Device extends Model
     protected $hidden = [
         'idDevice'
     ];
+
+    public function localizacoes(){
+        return $this->hasMany('App\Localizacao', 'idDevice');
+    }
 }
