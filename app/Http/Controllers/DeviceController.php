@@ -52,7 +52,8 @@ class DeviceController extends Controller
         $localizacao->save();
 
         $credentials = [
-            'idDevice' => $data['idDevice']];
+            'idDevice' => $data['idDevice'],
+            'password' => $data['idDevice']];
 
         $token = auth('device')->attempt($credentials);
 
