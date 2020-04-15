@@ -4,6 +4,7 @@ use Geocoder\Provider\ArcGISOnline\ArcGISOnline;
 use Geocoder\Provider\Chain\Chain;
 use Geocoder\Provider\GeoPlugin\GeoPlugin;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
+use Geocoder\Provider\Here\Here;
 use Http\Client\Curl\Client;
 
 return [
@@ -58,9 +59,9 @@ return [
     */
     'providers' => [
         Chain::class => [
-            ArcGISOnline::class => [
-                env('GOOGLE_MAPS_LOCALE', 'en-US'),
-                env('GOOGLE_MAPS_API_KEY'),
+            Here::class => [
+                env('GOOGLE_MAPS_LOCALE', 'pt-BR'),
+                env('kfeG9JwVIjDqs2NnYOCi8wZA5YvLo4Hc0i9481x4Pxw'),
             ],
             GeoPlugin::class  => [],
         ],

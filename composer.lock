@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7503f930dd01d32bed6f19fbeb322b19",
+    "content-hash": "6d81e08ef0cef84c37960eb10e2c319b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -845,6 +845,62 @@
             "description": "Geocoder GoogleMaps adapter",
             "homepage": "http://geocoder-php.org/Geocoder/",
             "time": "2019-04-26T20:17:17+00:00"
+        },
+        {
+            "name": "geocoder-php/here-provider",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/geocoder-php/here-provider.git",
+                "reference": "3b9021abb44d1d31bc24778af6781412fb881c42"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/geocoder-php/here-provider/zipball/3b9021abb44d1d31bc24778af6781412fb881c42",
+                "reference": "3b9021abb44d1d31bc24778af6781412fb881c42",
+                "shasum": ""
+            },
+            "require": {
+                "geocoder-php/common-http": "^4.0",
+                "php": "^7.0",
+                "willdurand/geocoder": "^4.0"
+            },
+            "provide": {
+                "geocoder-php/provider-implementation": "1.0"
+            },
+            "require-dev": {
+                "geocoder-php/provider-integration-tests": "^1.1",
+                "php-http/curl-client": "^1.7",
+                "php-http/message": "^1.0",
+                "phpunit/phpunit": "^6.5 || ^7.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Geocoder\\Provider\\Here\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "William Durand",
+                    "email": "william.durand1@gmail.com"
+                }
+            ],
+            "description": "Geocoder here adapter",
+            "homepage": "http://geocoder-php.org/Geocoder/",
+            "time": "2019-08-04T16:36:44+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

@@ -116,6 +116,7 @@
       <path value="$PROJECT_DIR$/vendor/geocoder-php/chain-provider" />
       <path value="$PROJECT_DIR$/vendor/toin0u/geocoder-laravel" />
       <path value="$PROJECT_DIR$/vendor/geocoder-php/arcgis-online-provider" />
+      <path value="$PROJECT_DIR$/vendor/geocoder-php/here-provider" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
