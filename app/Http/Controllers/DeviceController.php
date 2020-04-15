@@ -32,7 +32,7 @@ class DeviceController extends Controller
         $device = new Device($data);
         $device->save();
 
-        $localCidade = Localizacao::where('dados', $data['localizacao'])->orderBy('idLocalizacao', 'desc')->first()->get();
+        $localCidade = Localizacao::where('dados', $data['localizacao'])->orderBy('idLocalizacao', 'desc')->first();
         var_dump($localCidade->cidade);
 
         $coordenadas = explode(',', $data['localizacao']);
