@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Device;
 use App\Localizacao;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Geocoder\Laravel\ProviderAndDumperAggregator as Geocoder;
@@ -30,6 +31,7 @@ class DeviceController extends Controller
         }
 
         $device = new Device($data);
+        $device->password = Hash::make($data['idDevice']);;
         $device->save();
 
         $localCidade = Localizacao::where('dados', $data['localizacao'])->orderBy('idLocalizacao', 'desc')->first();
@@ -54,6 +56,7 @@ class DeviceController extends Controller
         $credentials = [
             'idDevice' => $data['idDevice'],
             'password' => $data['idDevice']];
+
 
         $token = auth('device')->attempt($credentials);
 

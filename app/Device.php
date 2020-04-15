@@ -19,7 +19,7 @@ class Device extends Authenticatable  implements JWTSubject
     ];
 
     protected $hidden = [
-        'idDevice'
+        'idDevice', 'password'
     ];
 
     public function localizacoes(){
