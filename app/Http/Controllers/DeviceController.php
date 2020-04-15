@@ -60,6 +60,10 @@ class DeviceController extends Controller
 
         $token = auth('device')->attempt($credentials);
 
-        var_dump($token);
+        return response()->json([
+            'token' => $token,
+            'type' => 'bearer',
+            'expires' => auth('device')->factory()->getTTL(),
+        ], 200, $header);
     }
 }
