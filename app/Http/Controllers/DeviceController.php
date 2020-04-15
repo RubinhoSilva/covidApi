@@ -30,7 +30,6 @@ class DeviceController extends Controller
         }
 
         $device = new Device($data);
-        $device->idDevice = $data['idDevice'];
         $device->save();
 
         $coordenadas = explode(',', $data['localizacao']);
@@ -41,7 +40,7 @@ class DeviceController extends Controller
         $localizacao->cidade = $resultado;
         $localizacao->dados = $data['localizacao'];
         $localizacao->horario = $data['horario'];
-        $localizacao->idDevice = $device->id;
+        $localizacao->idDevice = $device->idDevice;
         $localizacao->save();
     }
 }
