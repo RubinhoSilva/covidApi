@@ -11,7 +11,7 @@ class Device extends Model
 
     protected $table = 'tb_device';
     protected $primaryKey = 'idDevice';
-    protected $timestamps = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'plataforma', 'status'

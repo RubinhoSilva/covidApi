@@ -11,5 +11,5 @@ class Localizacao extends Model
 
     protected $table = 'tb_localizacao';
     protected $primaryKey = 'idLocalizacao';
-    protected $timestamps = false;
+    public $timestamps = false;
 }
