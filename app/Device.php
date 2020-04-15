@@ -14,7 +14,7 @@ class Device extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'plataforma', 'status'
+        'idDevice', 'plataforma', 'status'
     ];
 
     protected $hidden = [
