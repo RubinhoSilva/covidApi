@@ -33,8 +33,8 @@ class DeviceController extends Controller
         $device->save();
 
         $coordenadas = explode(',', $data['localizacao']);
-        $resultado = app('geocoder')->reverse($coordenadas[0], $coordenadas[1])->get();
-        var_dump($resultado[0]['locality']);
+        $resultado = app('geocoder')->reverse($coordenadas[0], $coordenadas[1])->toJson();
+        var_dump($resultado);
         //latitude, longitude
 
         $localizacao = new Localizacao();
