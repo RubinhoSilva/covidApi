@@ -12,4 +12,8 @@ class Localizacao extends Model
     protected $table = 'tb_localizacao';
     protected $primaryKey = 'idLocalizacao';
     public $timestamps = false;
+
+    public function device(){
+        return $this->hasOne('App\Device', 'idDevice');
+    }
 }
