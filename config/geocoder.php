@@ -60,8 +60,9 @@ return [
     'providers' => [
         Chain::class => [
             Here::class => [
-                env('GOOGLE_MAPS_LOCALE', 'pt-BR'),
-                env('kfeG9JwVIjDqs2NnYOCi8wZA5YvLo4Hc0i9481x4Pxw'),
+                'oaxQxAT2wEpnxipbtCWd',
+                'kfeG9JwVIjDqs2NnYOCi8wZA5YvLo4Hc0i9481x4Pxw',
+                false
             ],
             GeoPlugin::class  => [],
         ],
