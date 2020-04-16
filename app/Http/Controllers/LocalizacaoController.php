@@ -20,13 +20,19 @@ class LocalizacaoController extends Controller
         $data = $request->json()->all();
 
         $validator = Validator::make($data, [
-            'localizacao' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
             'horario' => 'required'
         ]);
 
         if ($validator->fails()) {
             return response()->json(['erros' => $validator->errors()], 206, $header, JSON_UNESCAPED_UNICODE);
         }
+
+        $latitude = $data['latitude'];
+        $longitude = $data['longitude'];
+
+        $data['localizacao'] = "$latitude,$longitude";
 
         $device =  Device::find(Auth::id());
 
