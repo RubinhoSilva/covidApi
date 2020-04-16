@@ -64,7 +64,7 @@ class LocalizacaoController extends Controller
         }
 
         var_dump(json_encode(Auth::user()));
-//        var_dump(Auth::id());
+        var_dump(Auth::id());
 
         $localizacao = new Localizacao();
         $localizacao->cidade = $cidade;
