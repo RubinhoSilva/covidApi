@@ -22,13 +22,19 @@ class DeviceController extends Controller
         $validator = Validator::make($data, [
             'idDevice' => 'required|max:191|unique:tb_device',
             'plataforma' => 'required|max:7',
-            'localizacao' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
             'horario' => 'required'
         ]);
 
         if ($validator->fails()) {
             return response()->json(['erros' => $validator->errors()], 206, $header, JSON_UNESCAPED_UNICODE);
         }
+
+        $latitude = $data['latitude'];
+        $longitude = $data['longitude'];
+
+        $data['localizacao'] = "$latitude,$longitude";
 
         $device = new Device($data);
         $device->password = Hash::make($data['idDevice']);;
