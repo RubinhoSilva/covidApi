@@ -68,7 +68,7 @@ class LocalizacaoController extends Controller
         $localizacao->cidade = $cidade;
         $localizacao->dados = $data['localizacao'];
         $localizacao->horario = $data['horario'];
-        $localizacao->idDevice = Auth::id();
+        $localizacao->idDevice = Auth::user()->idDevice;
         $localizacao->save();
     }
 }
