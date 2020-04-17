@@ -11,7 +11,7 @@ class Device extends Authenticatable implements JWTSubject
     use SoftDeletes;
 
     protected $table = 'tb_device';
-    protected $primaryKey = 'idDevice';
+//    protected $primaryKey = 'idDevice';
     public $timestamps = false;
 
     protected $fillable = [
