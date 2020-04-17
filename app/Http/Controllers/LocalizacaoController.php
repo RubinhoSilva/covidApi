@@ -8,7 +8,7 @@ use Haversini\Haversini;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Tymon\JWTAuth\JWTAuth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LocalizacaoController extends Controller
 {
