@@ -40,6 +40,6 @@ class Device extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return ['id' => $this->idDevice];
+        return ['idDevice' => $this->idDevice];
     }
 }
