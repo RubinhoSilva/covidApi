@@ -57,7 +57,7 @@ class DeviceController extends Controller
         $localizacao->cidade = $cidade;
         $localizacao->dados = $data['localizacao'];
         $localizacao->horario = $data['horario'];
-        $localizacao->idDevice = $device->id;
+        $localizacao->idDevice = $device->idDevice;
         $localizacao->save();
 
         $credentials = [
