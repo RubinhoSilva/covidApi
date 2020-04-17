@@ -6,7 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Device extends Authenticatable  implements JWTSubject
+class Device extends Authenticatable implements JWTSubject
 {
     use SoftDeletes;
 
@@ -19,10 +19,11 @@ class Device extends Authenticatable  implements JWTSubject
     ];
 
     protected $hidden = [
-        'password'
+        'idDevice', 'password'
     ];
 
-    public function localizacoes(){
+    public function localizacoes()
+    {
         return $this->hasMany('App\Localizacao', 'idDevice');
     }
 
@@ -39,6 +40,6 @@ class Device extends Authenticatable  implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return ['id' => $this->idDevice];
     }
 }

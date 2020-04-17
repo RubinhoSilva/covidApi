@@ -8,6 +8,7 @@ use Haversini\Haversini;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\JWTAuth;
 
 class LocalizacaoController extends Controller
 {
@@ -63,8 +64,9 @@ class LocalizacaoController extends Controller
             }
         }
 
-        var_dump(json_encode(Auth::user()));
-        var_dump(Auth::id());
+//        var_dump(json_encode(Auth::user()));
+//        var_dump(Auth::id());
+        var_dump(JWTAuth::getPayload());
 
         $localizacao = new Localizacao();
         $localizacao->cidade = $cidade;
