@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Geocoder\Laravel\ProviderAndDumperAggregator as Geocoder;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class DeviceController extends Controller
 {
@@ -64,7 +65,12 @@ class DeviceController extends Controller
             'password' => $data['idDevice']];
 
 
+        $customClaims = ['idDevice2' => $data['idDevice'], 'baz' => 'bob'];
+
+        $token2 = JWTAuth::attempt($credentials, $customClaims);
         $token = auth('device')->attempt($credentials);
+
+        var_dump($token2);
 
         return response()->json([
             'token' => $token,
