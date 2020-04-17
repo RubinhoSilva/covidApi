@@ -15,7 +15,7 @@ class Device extends Authenticatable implements JWTSubject
     public $timestamps = false;
 
     protected $fillable = [
-        'idDevice', 'plataforma', 'status'
+        'device', 'plataforma', 'status'
     ];
 
     protected $hidden = [
@@ -40,6 +40,6 @@ class Device extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return ['idDevice' => $this->idDevice];
+        return [];
     }
 }

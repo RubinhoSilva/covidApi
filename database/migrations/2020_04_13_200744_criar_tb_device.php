@@ -14,7 +14,8 @@ class CriarTbDevice extends Migration
     public function up()
     {
         Schema::create('tb_device', function (Blueprint $table) {
-            $table->string('idDevice', 191)->unique()->primary();
+            $table->id('idDevice');
+            $table->string('device', 191)->unique();
             $table->char('plataforma', 7);
             $table->tinyInteger('status')->default(0);
             $table->softDeletes();

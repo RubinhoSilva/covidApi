@@ -21,7 +21,7 @@ class DeviceController extends Controller
         $data = $request->json()->all();
 
         $validator = Validator::make($data, [
-            'idDevice' => 'required|max:191|unique:tb_device',
+            'device' => 'required|max:191|unique:tb_device',
             'plataforma' => 'required|max:7',
             'latitude' => 'required',
             'longitude' => 'required',
@@ -38,7 +38,7 @@ class DeviceController extends Controller
         $data['localizacao'] = "$latitude,$longitude";
 
         $device = new Device($data);
-        $device->password = Hash::make($data['idDevice']);;
+        $device->password = Hash::make($data['device']);;
         $device->save();
 
         $localCidade = Localizacao::where('dados', $data['localizacao'])->orderBy('idLocalizacao', 'desc')->first();
@@ -57,20 +57,16 @@ class DeviceController extends Controller
         $localizacao->cidade = $cidade;
         $localizacao->dados = $data['localizacao'];
         $localizacao->horario = $data['horario'];
-        $localizacao->idDevice = $data['idDevice'];
+        $localizacao->idDevice = $device->id;
         $localizacao->save();
 
         $credentials = [
-            'idDevice' => $data['idDevice'],
-            'password' => $data['idDevice']];
+            'device' => $data['device'],
+            'password' => $data['device']];
 
 
-        $customClaims = ['idDevice' => $data['idDevice'], 'baz' => 'bob'];
-
-        $token2 = JWTAuth::attempt($credentials, $customClaims);
         $token = auth('device')->attempt($credentials);
 
-        var_dump($token2);
 
         return response()->json([
             'token' => $token,
