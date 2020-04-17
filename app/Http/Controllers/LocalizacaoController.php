@@ -66,7 +66,7 @@ class LocalizacaoController extends Controller
 
 //        var_dump(json_encode(Auth::user()));
 //        var_dump(Auth::id());
-        var_dump(JWTAuth::getPayload()->get('idDevice'));
+        var_dump(JWTAuth::getPayload());
 
         $localizacao = new Localizacao();
         $localizacao->cidade = $cidade;
