@@ -14,7 +14,7 @@ class LocalizacaoDevice extends Migration
     public function up()
     {
         Schema::table('tb_localizacao', function (Blueprint $table) {
-            $table->string('idDevice', 191);
+            $table->bigInteger('idDevice')->unsigned();
             $table->foreign('idDevice')->references('idDevice')->on('tb_device')->onDelete('cascade');
         });
     }
