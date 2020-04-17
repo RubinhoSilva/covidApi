@@ -65,7 +65,7 @@ class DeviceController extends Controller
             'password' => $data['idDevice']];
 
 
-        $customClaims = ['idDevice1' => $data['idDevice'], 'baz' => 'bob'];
+        $customClaims = ['idDevice' => $data['idDevice'], 'baz' => 'bob'];
 
         $token2 = JWTAuth::attempt($credentials, $customClaims);
         $token = auth('device')->attempt($credentials);
