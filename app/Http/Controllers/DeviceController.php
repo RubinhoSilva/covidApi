@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Device;
 use App\Localizacao;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -12,7 +13,8 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class DeviceController extends Controller
 {
-    public function cadastrar(Request $request){
+    public function cadastrar(Request $request)
+    {
         $header = array(
             'Content-Type' => 'application/json; charset=UTF-8',
             'charset' => 'utf-8'
@@ -43,9 +45,9 @@ class DeviceController extends Controller
 
         $localCidade = Localizacao::where('dados', $data['localizacao'])->orderBy('idLocalizacao', 'desc')->first();
 
-        if($localCidade != null){
+        if ($localCidade != null) {
             $cidade = $localCidade->cidade;
-        }else{
+        } else {
             $coordenadas = explode(',', $data['localizacao']);
             $resultado = app('geocoder')->reverse($coordenadas[0], $coordenadas[1])->toJson();
             //latitude, longitude
@@ -72,6 +74,31 @@ class DeviceController extends Controller
             'token' => $token,
             'type' => 'bearer',
             'expires' => auth('device')->factory()->getTTL(),
+        ], 200, $header);
+    }
+
+    public function atualizarStatus(Request $request)
+    {
+        $header = array(
+            'Content-Type' => 'application/json; charset=UTF-8',
+            'charset' => 'utf-8'
+        );
+
+        $data = $request->json()->all();
+
+        $validator = Validator::make($data, [
+            'status' => 'required|int'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['erros' => $validator->errors()], 206, $header, JSON_UNESCAPED_UNICODE);
+        }
+
+        $device = Device::find(Auth::id());
+        $device->status = $data['status'];
+
+        return response()->json([
+            'sucesso' => 'Status alterado com sucesso!'
         ], 200, $header);
     }
 }
