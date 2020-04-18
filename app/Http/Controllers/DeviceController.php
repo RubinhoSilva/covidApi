@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Device;
-use App\Jobs\VerificaDistancia;
 use App\Localizacao;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -96,7 +95,7 @@ class DeviceController extends Controller
         $device = Device::find(Auth::id());
         $device->status = $data['status'];
 
-        VerificaDistancia::dispatch(Auth::id());
+        \App\Jobs\VerificaDistancia::dispatch(Auth::id());
 
         return response()->json([
             'sucesso' => 'Status alterado com sucesso!'
