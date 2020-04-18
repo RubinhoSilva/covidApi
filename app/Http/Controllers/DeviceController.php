@@ -95,7 +95,7 @@ class DeviceController extends Controller
         $device = Device::find(Auth::id());
         $device->status = $data['status'];
 
-        var_dump(\App\Jobs\VerificaDistancia::dispatch(Auth::id())->delay(now()->addSeconds(5)));
+        var_dump(\App\Jobs\VerificaDistancia::dispatch(Auth::id())->onQueue('verificacao')->delay(now()->addSeconds(5)));
 
         return response()->json([
             'sucesso' => 'Status alterado com sucesso!'
