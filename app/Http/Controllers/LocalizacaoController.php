@@ -108,7 +108,7 @@ class LocalizacaoController extends Controller
                             'm'
                         );
 
-                        printf($m);
+                        print("$m\n");
                     }
                 }
             }
