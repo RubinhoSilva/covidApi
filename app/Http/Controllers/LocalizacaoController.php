@@ -94,15 +94,17 @@ class LocalizacaoController extends Controller
 
             foreach ($idsDeviceCidadesFinal as $idDevice) {
                 print($idDevice);
-                $deviceLocalizacoes = Localizacao::where('idDevice', $idDevice)->get();
+                $deviceLocalizacoes = Localizacao::where('idDevice', $idDevice)->select('dados')->get();
 
                 foreach ($minhasLocalizacoes as $minhaLocalizacao) {
+                    $coordenadasMinhas = explode(',', $minhaLocalizacao->dados);
                     foreach ($deviceLocalizacoes as $deviceLocalizacao) {
+                        $coordenadasDevice = explode(',', $deviceLocalizacao->dados);
                         $m = Haversini::calculate(
-                            $minhaLocalizacao->latitude,
-                            $minhaLocalizacao->longitude,
-                            $deviceLocalizacao->latitude,
-                            $deviceLocalizacao->longitude,
+                            $coordenadasMinhas[0],
+                            $coordenadasMinhas[1],
+                            $coordenadasDevice[0],
+                            $coordenadasDevice[1],
                             'm'
                         );
 
