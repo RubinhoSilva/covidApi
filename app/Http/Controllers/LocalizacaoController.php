@@ -12,7 +12,8 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LocalizacaoController extends Controller
 {
-    public function atualizar(Request $request){
+    public function atualizar(Request $request)
+    {
         $header = array(
             'Content-Type' => 'application/json; charset=UTF-8',
             'charset' => 'utf-8'
@@ -35,7 +36,7 @@ class LocalizacaoController extends Controller
 
         $data['localizacao'] = "$latitude,$longitude";
 
-        $device =  Device::find(Auth::id());
+        $device = Device::find(Auth::id());
 
         $localCidade = $device->localizacoes()->orderBy('idLocalizacao', 'desc')->first();
         $coordenadasAntigas = explode(',', $localCidade->dados);
@@ -48,14 +49,14 @@ class LocalizacaoController extends Controller
             'km'
         );
 
-        if($km <= 4){
+        if ($km <= 4) {
             $cidade = $localCidade->cidade;
-        }else{
+        } else {
             $localCidade = Localizacao::where('dados', $data['localizacao'])->orderBy('idLocalizacao', 'desc')->first();
 
-            if($localCidade != null){
+            if ($localCidade != null) {
                 $cidade = $localCidade->cidade;
-            }else{
+            } else {
                 $coordenadas = explode(',', $data['localizacao']);
                 $resultado = app('geocoder')->reverse($coordenadas[0], $coordenadas[1])->toJson();
                 //latitude, longitude
@@ -73,22 +74,30 @@ class LocalizacaoController extends Controller
         $localizacao->save();
     }
 
-    public function teste(Request $request){
+    public function teste(Request $request)
+    {
         $cidades = Localizacao::where('idDevice', Auth::id())->select('cidade')->distinct()->get();
         $minhasLocalizacoes = Localizacao::where('idDevice', Auth::id())->get();
 
 //        print_r($cidades);
 //        var_dump($minhasLocalizacoes);
 
-        foreach ($cidades as $cidade){
+        $idsDeviceCidadesFinal = [];
+        foreach ($cidades as $cidade) {
             $idsDeviceCidades = Localizacao::where('cidade', $cidade->cidade)->select('idDevice')->distinct()->get();
 
-            foreach ($idsDeviceCidades as $idDevice){
+            foreach ($idsDeviceCidades as $device) {
+                if (!in_array($device->idDevice, $idsDeviceCidadesFinal)) {
+                    array_push($idsDeviceCidadesFinal, $device->idDevice);
+                }
+            }
+
+            foreach ($idsDeviceCidadesFinal as $idDevice) {
                 print($idDevice);
-                $deviceLocalizacoes = Localizacao::where('idDevice', $idDevice->iddevice)->get();
+                $deviceLocalizacoes = Localizacao::where('idDevice', $idDevice)->get();
 
                 foreach ($minhasLocalizacoes as $minhaLocalizacao) {
-                    foreach ($deviceLocalizacoes as $deviceLocalizacao){
+                    foreach ($deviceLocalizacoes as $deviceLocalizacao) {
                         $m = Haversini::calculate(
                             $minhaLocalizacao->latitude,
                             $minhaLocalizacao->longitude,
