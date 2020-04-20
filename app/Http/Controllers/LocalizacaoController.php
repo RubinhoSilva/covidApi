@@ -77,11 +77,13 @@ class LocalizacaoController extends Controller
         $cidades = Localizacao::where('idDevice', Auth::id())->select('cidade')->distinct()->get();
         $minhasLocalizacoes = Localizacao::where('idDevice', Auth::id())->get();
 
-        print_r($cidades);
+//        print_r($cidades);
 //        var_dump($minhasLocalizacoes);
 
         foreach ($cidades as $cidade){
-            $idsDeviceCidades = Localizacao::where('cidade', $cidade)->distinct('idDevice')->get();
+            $idsDeviceCidades = Localizacao::where('cidade', $cidade)->select('idDevice')->distinct()->get();
+
+            print($cidade);
 
             foreach ($idsDeviceCidades as $idDevice){
                 $deviceLocalizacoes = Localizacao::where('idDevice', $idDevice)->get();
