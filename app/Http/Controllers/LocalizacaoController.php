@@ -72,4 +72,34 @@ class LocalizacaoController extends Controller
         $localizacao->idDevice = Auth::id();
         $localizacao->save();
     }
+
+    public function teste(Request $request){
+        $cidades = Localizacao::where('idDevice', Auth::id())->distinct('cidade')->get();
+        $minhasLocalizacoes = Localizacao::where('idDevice', Auth::id())->get();
+
+        var_dump($cidades);
+        var_dump($minhasLocalizacoes);
+
+        foreach ($cidades as $cidade){
+            $idsDeviceCidades = Localizacao::where('cidade', $cidade)->distinct('idDevice')->get();
+
+            foreach ($idsDeviceCidades as $idDevice){
+                $deviceLocalizacoes = Localizacao::where('idDevice', $idDevice)->get();
+
+                foreach ($minhasLocalizacoes as $minhaLocalizacao) {
+                    foreach ($deviceLocalizacoes as $deviceLocalizacao){
+                        $m = Haversini::calculate(
+                            $minhaLocalizacao->latitude,
+                            $minhaLocalizacao->longitude,
+                            $deviceLocalizacao->latitude,
+                            $deviceLocalizacao->longitude,
+                            'm'
+                        );
+
+                        print($m);
+                    }
+                }
+            }
+        }
+    }
 }
