@@ -74,7 +74,7 @@ class LocalizacaoController extends Controller
     }
 
     public function teste(Request $request){
-        $cidades = Localizacao::where('idDevice', Auth::id())->distinct('cidade')->get();
+        $cidades = Localizacao::where('idDevice', Auth::id())->distinct('cidade');
         $minhasLocalizacoes = Localizacao::where('idDevice', Auth::id())->get();
 
         print_r($cidades);
