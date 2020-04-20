@@ -96,7 +96,7 @@ class LocalizacaoController extends Controller
 
         for ($i = 0; $i < sizeof($idsDeviceCidadesFinal); $i++) {
             $idDevice = $idsDeviceCidadesFinal[$i];
-            $cidade = $idsDeviceCidades[$i];
+            $cidade = $cidadesDevice[$i];
             $minhasLocalizacoes = Localizacao::where('idDevice', Auth::id())->where('cidade', $cidade)->get();
 
             $deviceLocalizacoes = Localizacao::where('idDevice', $idDevice)->where('cidade', $cidade)->select('dados')->get();
