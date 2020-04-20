@@ -77,39 +77,44 @@ class LocalizacaoController extends Controller
     public function teste(Request $request)
     {
         $cidades = Localizacao::where('idDevice', Auth::id())->select('cidade')->distinct()->get();
-        $minhasLocalizacoes = Localizacao::where('idDevice', Auth::id())->get();
 
 //        print_r($cidades);
 //        var_dump($minhasLocalizacoes);
 
         $idsDeviceCidadesFinal = [];
+        $cidadesDevice = [];
         foreach ($cidades as $cidade) {
             $idsDeviceCidades = Localizacao::where('cidade', $cidade->cidade)->select('idDevice')->distinct()->get();
 
             foreach ($idsDeviceCidades as $device) {
                 if (!in_array($device->idDevice, $idsDeviceCidadesFinal)) {
                     array_push($idsDeviceCidadesFinal, $device->idDevice);
+                    array_push($cidadesDevice, $cidade->cidade);
                 }
             }
+        }
 
-            foreach ($idsDeviceCidadesFinal as $idDevice) {
-                print($idDevice);
-                $deviceLocalizacoes = Localizacao::where('idDevice', $idDevice)->select('dados')->get();
+        for ($i = 0; $i < sizeof($idsDeviceCidadesFinal); $i++) {
+            $idDevice = $idsDeviceCidadesFinal[$i];
+            $cidade = $idsDeviceCidades[$i];
+            $minhasLocalizacoes = Localizacao::where('idDevice', Auth::id())->where('cidade', $cidade)->get();
 
-                foreach ($minhasLocalizacoes as $minhaLocalizacao) {
-                    $coordenadasMinhas = explode(',', $minhaLocalizacao->dados);
-                    foreach ($deviceLocalizacoes as $deviceLocalizacao) {
-                        $coordenadasDevice = explode(',', $deviceLocalizacao->dados);
-                        $m = Haversini::calculate(
-                            $coordenadasMinhas[0],
-                            $coordenadasMinhas[1],
-                            $coordenadasDevice[0],
-                            $coordenadasDevice[1],
-                            'm'
-                        );
+            $deviceLocalizacoes = Localizacao::where('idDevice', $idDevice)->where('cidade', $cidade)->select('dados')->get();
 
-                        print("$m\n");
-                    }
+
+            foreach ($minhasLocalizacoes as $minhaLocalizacao) {
+                $coordenadasMinhas = explode(',', $minhaLocalizacao->dados);
+                foreach ($deviceLocalizacoes as $deviceLocalizacao) {
+                    $coordenadasDevice = explode(',', $deviceLocalizacao->dados);
+                    $m = Haversini::calculate(
+                        $coordenadasMinhas[0],
+                        $coordenadasMinhas[1],
+                        $coordenadasDevice[0],
+                        $coordenadasDevice[1],
+                        'm'
+                    );
+
+                    print("$m\n");
                 }
             }
         }
