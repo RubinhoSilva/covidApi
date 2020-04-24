@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Device;
 use App\Localizacao;
 use Haversini\Haversini;
 use Illuminate\Bus\Queueable;
@@ -53,6 +54,9 @@ class VerificaDistancia implements ShouldQueue
                         );
 
                         if($m < 15){
+                            $device = Device::find($idDevice);
+                            $device->enviarNotificao($device->token, "teste", "teste");
+
                             VerificaDistancia::dispatch($idDevice);
                         }
                     }
