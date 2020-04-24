@@ -20,7 +20,7 @@ class Device extends Authenticatable implements JWTSubject
     public $timestamps = false;
 
     protected $fillable = [
-        'device', 'plataforma', 'status'
+        'device', 'plataforma', 'status', 'token'
     ];
 
     protected $hidden = [

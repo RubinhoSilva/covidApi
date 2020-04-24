@@ -25,7 +25,8 @@ class DeviceController extends Controller
             'plataforma' => 'required|max:7',
             'latitude' => 'required',
             'longitude' => 'required',
-            'horario' => 'required'
+            'horario' => 'required',
+            'token' => 'required'
         ]);
 
         if ($validator->fails()) {
