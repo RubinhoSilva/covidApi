@@ -34,30 +34,31 @@ class VerificaDistancia implements ShouldQueue
      */
     public function handle()
     {
-        $cidades = Localizacao::where('idDevice', Auth::id())->distinct('cidade')->get();
-        $minhasLocalizacoes = Localizacao::where('idDevice', Auth::id())->get();
+        $cidades = Localizacao::where('idDevice', Auth::id())->select('cidade')->distinct()->get();
 
-        foreach ($cidades as $cidade){
-            $idsDeviceCidades = Localizacao::where('cidade', $cidade)->distinct('idDevice')->get();
+        foreach ($cidades as $cidade) {
+            $idsDeviceCidades = Localizacao::where('cidade', $cidade->cidade)->select('idDevice')->distinct()->get();
 
-            foreach ($idsDeviceCidades as $idDevice){
-                $deviceLocalizacoes = Localizacao::where('idDevice', $idDevice)->get();
+            foreach ($idsDeviceCidades as $idDevice) {
+                $minhasLocalizacoes = Localizacao::where('idDevice', Auth::id())->where('cidade', $cidade->cidade)->get();
+                $deviceLocalizacoes = Localizacao::where('idDevice', $idDevice->idDevice)->where('cidade', $cidade->cidade)->select('dados')->get();
 
                 foreach ($minhasLocalizacoes as $minhaLocalizacao) {
-                    foreach ($deviceLocalizacoes as $deviceLocalizacao){
+                    $coordenadasMinhas = explode(',', $minhaLocalizacao->dados);
+                    foreach ($deviceLocalizacoes as $deviceLocalizacao) {
+                        $coordenadasDevice = explode(',', $deviceLocalizacao->dados);
                         $m = Haversini::calculate(
-                            $minhaLocalizacao->latitude,
-                            $minhaLocalizacao->longitude,
-                            $deviceLocalizacao->latitude,
-                            $deviceLocalizacao->longitude,
+                            $coordenadasMinhas[0],
+                            $coordenadasMinhas[1],
+                            $coordenadasDevice[0],
+                            $coordenadasDevice[1],
                             'm'
                         );
 
-                        if($m < 15){
+                        if($m < 20){
                             $device = Device::find($idDevice);
-                            $device->enviarNotificao($device->token, "teste", "teste");
 
-                            VerificaDistancia::dispatch($idDevice);
+                            $device->enviarNotificacao($device->token, "teste", "teste");
                         }
                     }
                 }
