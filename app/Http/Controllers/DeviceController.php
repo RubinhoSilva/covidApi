@@ -101,4 +101,9 @@ class DeviceController extends Controller
             'sucesso' => 'Status alterado com sucesso!'
         ], 200, $header);
     }
+
+    public function teste(){
+        $device = new Device();
+        $device->enviarNotificao();
+    }
 }

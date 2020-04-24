@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::post('/cadastrarDevice', 'DeviceController@cadastrar');
+Route::post('/teste', 'DeviceController@teste');
 
 Route::middleware(['guard.jwt:device', 'jwt.auth'])->group(function () {
     Route::post('/atualizarLocalizacao', 'LocalizacaoController@atualizar');
