@@ -58,7 +58,7 @@ class VerificaDistancia implements ShouldQueue
                         if($m < 20){
                             $device = Device::find($idDevice);
 
-                            $device->enviarNotificacao($device->token, "teste", "teste");
+                            $device->enviarNotificacao($device['token'], "teste", "teste");
                         }
                     }
                 }
