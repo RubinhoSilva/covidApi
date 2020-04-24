@@ -17,6 +17,7 @@ class CriarTbDevice extends Migration
             $table->id('idDevice');
             $table->string('device', 191)->unique();
             $table->char('plataforma', 7);
+            $table->string('token', 255);
             $table->tinyInteger('status')->default(0);
             $table->softDeletes();
         });

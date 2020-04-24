@@ -48,15 +48,15 @@ class Device extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function enviarNotificao(){
+    public function enviarNotificao($token, $titulo, $corpo){
         $optionBuilder = new OptionsBuilder();
         try {
             $optionBuilder->setTimeToLive(60 * 20);
         } catch (InvalidOptionsException $e) {
         }
 
-        $notificationBuilder = new PayloadNotificationBuilder('my title');
-        $notificationBuilder->setBody('Hello world')
+        $notificationBuilder = new PayloadNotificationBuilder($titulo);
+        $notificationBuilder->setBody($corpo)
             ->setSound('default');
 
         $dataBuilder = new PayloadDataBuilder();
@@ -65,8 +65,6 @@ class Device extends Authenticatable implements JWTSubject
         $option = $optionBuilder->build();
         $notification = $notificationBuilder->build();
         $data = $dataBuilder->build();
-
-        $token = "fuY_ezZUES0:APA91bGUNPQO0Y0ER-ywjhlaPLGKa-dYKc5glLUzLYv9FmLkOfc2sX5pWfnfGmCHbouQ6JLppILpZpu-J-20VOkg78MWU5uFWVCL-pdk0b1h5BoDI4lLXIqkwhtz6875z5WqAob2oJkn";
 
         $downstreamResponse = FCM::sendTo($token, $option, $notification, $data);
 
