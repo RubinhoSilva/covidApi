@@ -103,10 +103,9 @@ class LocalizacaoController extends Controller
 
                             if(!($device->status == 1 || $device->status == 2)){
                                 $device->enviarNotificacao($device->token, "teste", "teste");
+                                $device->status = 1;
+                                $device->save();
                             }
-
-                            $device->status = 1;
-                            $device->save();
 
 //                            var_dump($device[0]->token);
 
