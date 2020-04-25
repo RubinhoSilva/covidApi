@@ -48,7 +48,7 @@ class Device extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function enviarNotificao($token, $titulo, $corpo){
+    public function enviarNotificacao($token, $titulo, $corpo){
         $optionBuilder = new OptionsBuilder();
         try {
             $optionBuilder->setTimeToLive(60 * 20);
