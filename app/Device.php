@@ -13,6 +13,11 @@ use LaravelFCM\Facades\FCM;
 
 class Device extends Authenticatable implements JWTSubject
 {
+    /*status:
+        0 -> suave
+        1 -> monitoramento
+        2 -> suspeito*/
+
     use SoftDeletes;
 
     protected $table = 'tb_device';
