@@ -103,7 +103,7 @@ class LocalizacaoController extends Controller
 
 //                            $device->enviarNotificacao($device->token, "teste", "teste");
 
-                            var_dump($device);
+                            var_dump($device->token);
                         }
                     }
                 }
