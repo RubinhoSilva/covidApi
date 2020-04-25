@@ -40,7 +40,8 @@ class VerificaDistancia implements ShouldQueue
             $idsDeviceCidades = Localizacao::where('cidade', $cidade->cidade)->select('idDevice')->distinct()->get();
 
             foreach ($idsDeviceCidades as $idDevice) {
-                if(!$this->idDevice == $idDevice->idDevice){
+                $device = Device::find($idDevice->idDevice);
+                if (!($device->status == 1 || $device->status == 2)) {
                     $minhasLocalizacoes = Localizacao::where('idDevice', $this->idDevice)->where('cidade', $cidade->cidade)->get();
                     $deviceLocalizacoes = Localizacao::where('idDevice', $idDevice->idDevice)->where('cidade', $cidade->cidade)->select('dados')->get();
 
@@ -58,10 +59,8 @@ class VerificaDistancia implements ShouldQueue
 
                             print("idDevice $idDevice->idDevice\n");
                             print("$m\n");
-                            if($m < 20){
-                                $device = Device::find($idDevice->idDevice);
-
-                                if(!($device->status == 1 || $device->status == 2)){
+                            if ($m < 20) {
+                                if (!($device->status == 1 || $device->status == 2)) {
                                     $device->enviarNotificacao($device->token, "teste", "teste");
                                     $device->status = 1;
                                     $device->save();
@@ -70,6 +69,7 @@ class VerificaDistancia implements ShouldQueue
                         }
                     }
                 }
+
             }
         }
 
