@@ -101,7 +101,7 @@ class LocalizacaoController extends Controller
                         if($m < 20){
                             $device = Device::find($idDevice);
 
-                            $device->enviarNotificacao($device['token'], "teste", "teste");
+                            $device->enviarNotificacao($device->token, "teste", "teste");
 
                             print("$idDevice\n");
                         }
