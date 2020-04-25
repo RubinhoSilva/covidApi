@@ -40,30 +40,32 @@ class VerificaDistancia implements ShouldQueue
             $idsDeviceCidades = Localizacao::where('cidade', $cidade->cidade)->select('idDevice')->distinct()->get();
 
             foreach ($idsDeviceCidades as $idDevice) {
-                $minhasLocalizacoes = Localizacao::where('idDevice', $this->idDevice)->where('cidade', $cidade->cidade)->get();
-                $deviceLocalizacoes = Localizacao::where('idDevice', $idDevice->idDevice)->where('cidade', $cidade->cidade)->select('dados')->get();
+                if(!$this->idDevice == $idDevice->idDevice){
+                    $minhasLocalizacoes = Localizacao::where('idDevice', $this->idDevice)->where('cidade', $cidade->cidade)->get();
+                    $deviceLocalizacoes = Localizacao::where('idDevice', $idDevice->idDevice)->where('cidade', $cidade->cidade)->select('dados')->get();
 
-                foreach ($minhasLocalizacoes as $minhaLocalizacao) {
-                    $coordenadasMinhas = explode(',', $minhaLocalizacao->dados);
-                    foreach ($deviceLocalizacoes as $deviceLocalizacao) {
-                        $coordenadasDevice = explode(',', $deviceLocalizacao->dados);
-                        $m = Haversini::calculate(
-                            $coordenadasMinhas[0],
-                            $coordenadasMinhas[1],
-                            $coordenadasDevice[0],
-                            $coordenadasDevice[1],
-                            'm'
-                        );
+                    foreach ($minhasLocalizacoes as $minhaLocalizacao) {
+                        $coordenadasMinhas = explode(',', $minhaLocalizacao->dados);
+                        foreach ($deviceLocalizacoes as $deviceLocalizacao) {
+                            $coordenadasDevice = explode(',', $deviceLocalizacao->dados);
+                            $m = Haversini::calculate(
+                                $coordenadasMinhas[0],
+                                $coordenadasMinhas[1],
+                                $coordenadasDevice[0],
+                                $coordenadasDevice[1],
+                                'm'
+                            );
 
-                        print("idDevice $idDevice->idDevice\n");
-                        print("$m\n");
-                        if($m < 20){
-                            $device = Device::find($idDevice->idDevice);
+                            print("idDevice $idDevice->idDevice\n");
+                            print("$m\n");
+                            if($m < 20){
+                                $device = Device::find($idDevice->idDevice);
 
-                            if(!($device->status == 1 || $device->status == 2)){
-                                $device->enviarNotificacao($device->token, "teste", "teste");
-                                $device->status = 1;
-                                $device->save();
+                                if(!($device->status == 1 || $device->status == 2)){
+                                    $device->enviarNotificacao($device->token, "teste", "teste");
+                                    $device->status = 1;
+                                    $device->save();
+                                }
                             }
                         }
                     }
