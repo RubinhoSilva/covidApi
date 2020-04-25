@@ -76,34 +76,41 @@ class LocalizacaoController extends Controller
 
     public function teste(Request $request)
     {
-//        $cidades = Localizacao::where('idDevice', Auth::id())->select('cidade')->distinct()->get();
-//
-//        foreach ($cidades as $cidade) {
-//            $idsDeviceCidades = Localizacao::where('cidade', $cidade->cidade)->select('idDevice')->distinct()->get();
-//
-//            foreach ($idsDeviceCidades as $idDevice) {
-//                $minhasLocalizacoes = Localizacao::where('idDevice', Auth::id())->where('cidade', $cidade->cidade)->get();
-//                $deviceLocalizacoes = Localizacao::where('idDevice', $idDevice->idDevice)->where('cidade', $cidade->cidade)->select('dados')->get();
-//
-//                foreach ($minhasLocalizacoes as $minhaLocalizacao) {
-//                    $coordenadasMinhas = explode(',', $minhaLocalizacao->dados);
-//                    foreach ($deviceLocalizacoes as $deviceLocalizacao) {
-//                        $coordenadasDevice = explode(',', $deviceLocalizacao->dados);
-//                        $m = Haversini::calculate(
-//                            $coordenadasMinhas[0],
-//                            $coordenadasMinhas[1],
-//                            $coordenadasDevice[0],
-//                            $coordenadasDevice[1],
-//                            'm'
-//                        );
-//
-//                        print("$m\n");
-//                    }
-//                }
-//            }
-//        }
+        $cidades = Localizacao::where('idDevice', Auth::id())->select('cidade')->distinct()->get();
 
-        $device = Device::find(Auth::id());
-        $device->enviarNotificacao($device['token'], "teste", "teste");
+        foreach ($cidades as $cidade) {
+            $idsDeviceCidades = Localizacao::where('cidade', $cidade->cidade)->select('idDevice')->distinct()->get();
+
+            foreach ($idsDeviceCidades as $idDevice) {
+                $minhasLocalizacoes = Localizacao::where('idDevice', Auth::id())->where('cidade', $cidade->cidade)->get();
+                $deviceLocalizacoes = Localizacao::where('idDevice', $idDevice->idDevice)->where('cidade', $cidade->cidade)->select('dados')->get();
+
+                foreach ($minhasLocalizacoes as $minhaLocalizacao) {
+                    $coordenadasMinhas = explode(',', $minhaLocalizacao->dados);
+                    foreach ($deviceLocalizacoes as $deviceLocalizacao) {
+                        $coordenadasDevice = explode(',', $deviceLocalizacao->dados);
+                        $m = Haversini::calculate(
+                            $coordenadasMinhas[0],
+                            $coordenadasMinhas[1],
+                            $coordenadasDevice[0],
+                            $coordenadasDevice[1],
+                            'm'
+                        );
+
+                        print("$m\n");
+                        if($m < 20){
+                            $device = Device::find($idDevice);
+
+                            $device->enviarNotificacao($device['token'], "teste", "teste");
+
+                            print("$idDevice\n");
+                        }
+                    }
+                }
+            }
+        }
+
+//        $device = Device::find(Auth::id());
+//        $device->enviarNotificacao($device['token'], "teste", "teste");
     }
 }
