@@ -97,6 +97,7 @@ class LocalizacaoController extends Controller
                             'm'
                         );
 
+                        print("idDevice $idDevice\n");
                         print("$m\n");
                         if($m < 20){
                             $device = Device::find($idDevice);
