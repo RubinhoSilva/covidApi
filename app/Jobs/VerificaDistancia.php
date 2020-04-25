@@ -34,13 +34,13 @@ class VerificaDistancia implements ShouldQueue
      */
     public function handle()
     {
-        $cidades = Localizacao::where('idDevice', Auth::id())->select('cidade')->distinct()->get();
+        $cidades = Localizacao::where('idDevice', $this->idDevice)->select('cidade')->distinct()->get();
 
         foreach ($cidades as $cidade) {
             $idsDeviceCidades = Localizacao::where('cidade', $cidade->cidade)->select('idDevice')->distinct()->get();
 
             foreach ($idsDeviceCidades as $idDevice) {
-                $minhasLocalizacoes = Localizacao::where('idDevice', Auth::id())->where('cidade', $cidade->cidade)->get();
+                $minhasLocalizacoes = Localizacao::where('idDevice', $this->idDevice)->where('cidade', $cidade->cidade)->get();
                 $deviceLocalizacoes = Localizacao::where('idDevice', $idDevice->idDevice)->where('cidade', $cidade->cidade)->select('dados')->get();
 
                 foreach ($minhasLocalizacoes as $minhaLocalizacao) {
