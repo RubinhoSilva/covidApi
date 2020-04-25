@@ -55,10 +55,16 @@ class VerificaDistancia implements ShouldQueue
                             'm'
                         );
 
+                        print("idDevice $idDevice->idDevice\n");
+                        print("$m\n");
                         if($m < 20){
-                            $device = Device::find($idDevice);
+                            $device = Device::find($idDevice->idDevice);
 
-                            $device->enviarNotificacao($device['token'], "teste", "teste");
+                            $device->enviarNotificacao($device->token, "teste", "teste");
+
+//                            var_dump($device[0]->token);
+
+                            break;
                         }
                     }
                 }
