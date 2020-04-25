@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Device;
+use App\Jobs\VerificaDistancia;
 use App\Localizacao;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -97,7 +98,7 @@ class DeviceController extends Controller
         $device->status = $data['status'];
         $device->save();
 
-        var_dump(\App\Jobs\VerificaDistancia::dispatch(Auth::id())->onQueue('verificacao')->delay(now()->addSeconds(5)));
+        VerificaDistancia::dispatch(Auth::id())->onQueue('verificacao')->delay(now()->addMinutes(90));
 
         return response()->json([
             'sucesso' => 'Status alterado com sucesso!'
