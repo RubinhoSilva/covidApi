@@ -65,6 +65,12 @@ class LocalizacaoController extends Controller
                     $cidade = json_decode($resultado)->properties->locality;
                 }
             }
+        }else{
+            $coordenadas = explode(',', $data['localizacao']);
+            $resultado = app('geocoder')->reverse($coordenadas[0], $coordenadas[1])->toJson();
+            //latitude, longitude
+
+            $cidade = json_decode($resultado)->properties->locality;
         }
 
 
