@@ -65,7 +65,7 @@ class Device extends Authenticatable implements JWTSubject
             ->setSound('default');
 
         $dataBuilder = new PayloadDataBuilder();
-        $dataBuilder->addData(['click_action' => 'FLUTTER_NOTIFICATION_CLICK', 'screen' => ]);
+//        $dataBuilder->addData(['click_action' => 'FLUTTER_NOTIFICATION_CLICK', 'screen');
 
         $option = $optionBuilder->build();
         $notification = $notificationBuilder->build();
