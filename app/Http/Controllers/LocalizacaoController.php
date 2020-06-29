@@ -71,6 +71,10 @@ class LocalizacaoController extends Controller
         $localizacao->horario = $data['horario'];
         $localizacao->idDevice = Auth::id();
         $localizacao->save();
+
+        return response()->json([
+            'mensagem' => "Atualizado com sucesso!",
+        ], 200, $header);
     }
 
     public function teste(Request $request)
@@ -98,10 +102,10 @@ class LocalizacaoController extends Controller
 
                         print("idDevice $idDevice->idDevice\n");
                         print("$m\n");
-                        if($m < 20){
+                        if ($m < 20) {
                             $device = Device::find($idDevice->idDevice);
 
-                            if(!($device->status == 1 || $device->status == 2)){
+                            if (!($device->status == 1 || $device->status == 2)) {
                                 $device->enviarNotificacao($device->token, "teste", "teste");
                                 $device->status = 1;
                                 $device->save();
